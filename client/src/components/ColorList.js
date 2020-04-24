@@ -9,7 +9,7 @@ const initialColor = {
 };
 
 
-const ColorList = ({ colors, updateColors, fetchColor }) => {
+const ColorList = ({ colors, updateColors, fetchColor, deleteColors }) => {
   console.log(colors);
   const [editing, setEditing] = useState(false);
   const [colorToEdit, setColorToEdit] = useState(initialColor);
@@ -38,6 +38,11 @@ const ColorList = ({ colors, updateColors, fetchColor }) => {
   };
 
   const deleteColor = color => {
+    axiosWithAuth()
+      .delete(`/colors/${color.id}`)
+      .then(res => {
+        deleteColors(res.data);
+      })
   };
 
   return (

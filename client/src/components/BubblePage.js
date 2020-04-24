@@ -22,6 +22,12 @@ const BubblePage = () => {
       .catch(err => console.log(err))
 };
 
+  const deleteColors = deletedColor => {
+    const newColorList = [...colorList];
+    const deletedColors = newColorList.filter(item => item.id !== deletedColor)
+    setColorList(deletedColors);
+  }
+
 useEffect(() => {
   fetchColor();
 }, []);
@@ -29,7 +35,7 @@ useEffect(() => {
 
   return (
     <>
-      <ColorList colors={colorList} updateColors={setColorList} fetchColor={fetchColor} />
+      <ColorList colors={colorList} updateColors={setColorList} fetchColor={fetchColor} deleteColors={deleteColors} />
       <Bubbles colors={colorList} />
     </>
   );
